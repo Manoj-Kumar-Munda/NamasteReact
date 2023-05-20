@@ -1,6 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import RestCardSkeleton from "./Skeleton/RestCardSkeleton";
+
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
@@ -56,17 +58,20 @@ const Body = () => {
           Search
         </button>
       </div>
-      {filteredRestaurant.length === 0 ? (
-        <h1>Loading</h1>
-      ) : (
-        <div className="container">
-          {filteredRestaurant.map((item) => {
-            return <RestaurantCard key={item.id} restaurant={item} />;
-          })}
-        </div>
-      )}
+
+      <div className="container">
+        {
+          (restaurantList.length === 0)?
+          ([1, 2, 3, 4, 5, 6].map((item) => <RestCardSkeleton />)):
+          (filteredRestaurant.length === 0)?(<h1>No match found</h1>):
+          filteredRestaurant.map((item) => {
+            return < RestaurantCard key={item.id} restaurant={item} />;
+          })
+
+        }
+        
+      </div>
     </>
   );
 };
-
 export default Body;

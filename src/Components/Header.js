@@ -1,10 +1,12 @@
+import { useState } from "react";
 import logo from "../Assets/img/food-logo.png";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <div className="header">
       <div>
-        <img src={logo} className="logo" alt = "logo"/>
+        <img src={logo} className="logo" alt="logo" />
       </div>
 
       <nav className="navbar">
@@ -15,6 +17,13 @@ const Header = () => {
           <li className="nav-items">Cart</li>
         </ul>
       </nav>
+      <div>
+        { (isLoggedIn) ? (
+          <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+        ) : (
+          <button onClick={() => setIsLoggedIn(true)}>Login</button>
+        )}
+      </div>
     </div>
   );
 };
