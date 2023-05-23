@@ -2,6 +2,11 @@ import RestaurantCard from "./RestaurantCard";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import RestCardSkeleton from "./Skeleton/RestCardSkeleton";
+import { Link } from "react-router-dom";
+import { filterData } from "./utils/helper";
+import { RESTAURANT_LIST_URL } from "../constants";
+import useOnline from "./utils/useOnline";
+
 
 
 const Body = () => {
@@ -20,10 +25,17 @@ const Body = () => {
     return list;
   }
 
+  const isOnline = useOnline();
+  if(!isOnline){
+    return(
+      
+        <h1>Oops!! Please check your internet connection</h1>
+        
+    )
+  }
+
   async function getRestaurantList() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.366893297739587&lng=85.33701281994581&offset=15&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING"
-    );
+    const data = await fetch(RESTAURANT_LIST_URL);
     const resData = await data.json();
     const resList = getList(resData);
     console.log(resList);
@@ -31,12 +43,7 @@ const Body = () => {
     setFilteredRestaurant(resList);
   }
 
-  function filterData(searchText, resList) {
-    const data = resList.filter((item) =>
-      item.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    return data;
-  }
+ 
 
   return (
     <>
@@ -62,10 +69,12 @@ const Body = () => {
       <div className="container">
         {
           (restaurantList.length === 0)?
-          ([1, 2, 3, 4, 5, 6].map((item) => <RestCardSkeleton />)):
+          ([1, 2, 3, 4, 5, 6].map((item,index) => <RestCardSkeleton key={index}/>)):
           (filteredRestaurant.length === 0)?(<h1>No match found</h1>):
           filteredRestaurant.map((item) => {
-            return < RestaurantCard key={item.id} restaurant={item} />;
+            return <Link key={item.id} to={"/restaurant/"+item?.id}>
+                      < RestaurantCard  restaurant={item} />
+                    </Link>;
           })
 
         }

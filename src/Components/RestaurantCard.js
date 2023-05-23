@@ -5,9 +5,9 @@ const RestaurantCard = (props) => {
     return (
       <div className="card">
         <img src={IMG_CDN_URL+restaurant.cloudinaryImageId} />
-        <h2>{restaurant.name}</h2>
-        <h3>{restaurant.cuisines.join(',')}</h3>
-        <h4>{restaurant.avgRating}</h4>
+        <h2>{restaurant?.name}</h2>
+        <h3>{restaurant?.cuisines}</h3>
+        <h4>{restaurant?.avgRating}</h4>
       </div>
     );
   };
