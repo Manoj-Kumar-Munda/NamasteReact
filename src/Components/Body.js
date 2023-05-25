@@ -47,16 +47,16 @@ const Body = () => {
 
   return (
     <>
-      <div className="search-container">
+      <div className="lg:mx-28 px-2 my-4">
         <input
           type="text"
           placeholder="search"
-          className="search-bar"
+          className=" border-2 border-slate-500"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button
-          className="search-btn"
+          className="border-2 border-slate-500 border-l-0 px-2"
           onClick={() => {
             const data = filterData(searchText, restaurantList);
             setFilteredRestaurant(data);
@@ -66,7 +66,7 @@ const Body = () => {
         </button>
       </div>
 
-      <div className="container">
+      <div className="mx-auto lg:mx-28 my-10 grid lg:grid-cols-4 md:grid-cols-3 gap-3 justify-center">
         {
           (restaurantList.length === 0)?
           ([1, 2, 3, 4, 5, 6].map((item,index) => <RestCardSkeleton key={index}/>)):

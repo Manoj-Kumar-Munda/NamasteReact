@@ -3,11 +3,11 @@ import { IMG_CDN_URL } from "../constants.js";
 const RestaurantCard = (props) => {
     const {restaurant} = props;
     return (
-      <div className="card">
+      <div className="max-w-sm p-2 border-2 border-slate-100">
         <img src={IMG_CDN_URL+restaurant.cloudinaryImageId} />
         <h2>{restaurant?.name}</h2>
-        <h3>{restaurant?.cuisines}</h3>
-        <h4>{restaurant?.avgRating}</h4>
+        <p className="truncate">{restaurant?.cuisines?.join(',')}</p>
+        <p>{restaurant?.avgRating}</p>
       </div>
     );
   };
