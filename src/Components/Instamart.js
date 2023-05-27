@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const Section = ({ title, description, isVisible, setIsVisible }) => {
-  
   return (
     <div className="border-2 border-slate-700 p-4 m-3">
       <h3 className="font-bold text-xl">{title}</h3>
@@ -9,7 +8,7 @@ const Section = ({ title, description, isVisible, setIsVisible }) => {
         <button
           className="bg-zinc-300 px-2"
           onClick={() => {
-            setIsVisible("");
+            setIsVisible();
           }}
         >
           Hide
@@ -18,7 +17,7 @@ const Section = ({ title, description, isVisible, setIsVisible }) => {
         <button
           className="bg-zinc-300 px-2"
           onClick={() => {
-            setIsVisible(true);
+            setIsVisible();
           }}
         >
           Show
@@ -31,7 +30,7 @@ const Section = ({ title, description, isVisible, setIsVisible }) => {
 };
 
 const Instamart = () => {
-    const [ visibleSection, setVisibleSection] = useState("about")
+  const [visibleSection, setVisibleSection] = useState("");
   return (
     <div>
       <h1>Instamart</h1>
@@ -41,7 +40,11 @@ const Instamart = () => {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         }
         isVisible={visibleSection === "about"}
-        setIsVisible={() => (visibleSection !== "about")?(setVisibleSection("about")):(setVisibleSection(""))}
+        setIsVisible={() =>
+          visibleSection !== "about"
+            ? setVisibleSection("about")
+            : setVisibleSection("")
+        }
       />
       <Section
         title={"Team Instamart"}
@@ -49,7 +52,11 @@ const Instamart = () => {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         }
         isVisible={visibleSection === "team"}
-        setIsVisible={() => (visibleSection !== "team")?(setVisibleSection("team")):(setVisibleSection(""))}
+        setIsVisible={() =>
+          visibleSection !== "team"
+            ? setVisibleSection("team")
+            : setVisibleSection("")
+        }
       />
       <Section
         title={"Careers"}
@@ -57,7 +64,11 @@ const Instamart = () => {
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         }
         isVisible={visibleSection === "careers"}
-        setIsVisible={() => (visibleSection !== "careers")?(setVisibleSection("careers")):(setVisibleSection(""))}
+        setIsVisible={() =>
+          visibleSection !== "careers"
+            ? setVisibleSection("careers")
+            : setVisibleSection("")
+        }
       />
     </div>
   );

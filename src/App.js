@@ -11,6 +11,9 @@ import RestaurantMenu from "./Components/RestaurantMenu";
 import Profile from "./Components/Profile";
 import Shimmer from "./Components/Skeleton/Shimmer";
 import UserContext from "./Components/utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./Components/utils/store";
+import Cart from "./Components/Cart";
 // import Instamart  from "./Components/Instamart";
 
 //Never ever do lazy loading inside a component
@@ -22,13 +25,15 @@ const AppLayout = () => {
   });
   return (
     <>
-      <UserContext.Provider value={{
-        user: user,
-      }}>
-        <Header />
-        <Outlet />
-        <Footer />
-      </UserContext.Provider>
+      <Provider store={store}>
+        <UserContext.Provider value={{
+          user: user,
+        }}>
+          <Header />
+          <Outlet />
+          <Footer />
+        </UserContext.Provider>
+      </Provider>
     </>
   );
 };
@@ -69,6 +74,10 @@ const AppRouter = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path : "/cart",
+        element : <Cart />
+      }
     ],
   },
 ]);

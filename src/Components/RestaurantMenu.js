@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Skeleton/Shimmer";
 import useRestaurant from "./utils/useRestaurant";
+import { addItem } from "./utils/cartSlice";
+import { useDispatch } from "react-redux";
 
 const RestaurantMenu = () => {
   
@@ -10,9 +12,15 @@ const RestaurantMenu = () => {
 
   const [restaurantInfo, restaurantMenu] = useRestaurant(id);
 
+  const dispatch = useDispatch();
+
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  }
+
   return (
     
-    <div className="menu-container">
+    <div className="grid grid-cols-2">
       <div className="resInfo">
         <h1>Restaurant id : {restaurantInfo.id}</h1>
         <h2>{restaurantInfo.name}</h2>
@@ -22,6 +30,7 @@ const RestaurantMenu = () => {
           {restaurantInfo.areaName} , {restaurantInfo.locality}
         </h2>
       </div>
+     
       <div className="menu">
         <ul>
           {restaurantMenu.length === 0 ? (
@@ -29,9 +38,10 @@ const RestaurantMenu = () => {
           ) : (
             restaurantMenu.map((item) => {
               return (
-                <li className="menu-item" key={item?.card?.info?.id}>
+                <li className="my-2" key={item?.card?.info?.id}>
                   
-                  {item?.card?.info?.name}
+                  {item?.card?.info?.name} -  <button className="p-1 bg-green-300" onClick={() => addFoodItem(item?.card?.info)}>Add item</button>
+      
                 </li>
               );
             })

@@ -2,11 +2,16 @@ import { useState, useContext } from "react";
 import logo from "../Assets/img/food-logo.png";
 import { Link } from "react-router-dom";
 import UserContext from "./utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { user } = useContext(UserContext);
+
+  const cartItems = useSelector( store => store.cart.items);
+
+  console.log(cartItems);
   return (
     <div className="flex justify-between items-center">
       <div>
@@ -32,7 +37,11 @@ const Header = () => {
             <li className="nav-items">
               <Link to="/instamart">Instamart</Link>
             </li>
-            <li className="nav-items">Cart</li>
+            <li className="nav-items">
+              <Link to="/cart">
+                Cart - {cartItems.length} items
+              </Link>
+              </li>
         </ul>
       </nav>
       <div>
